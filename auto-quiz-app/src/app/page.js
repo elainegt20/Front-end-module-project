@@ -1,10 +1,11 @@
 import React from 'react';
+import UploadeForm from './components/FileUploader';
 
 function Home() {
-  const name = 'hello';
   return (
     <main>
-      <h1>Hello Next {name}!</h1>
+      <h1>Hello Next!</h1>
+      <UploadeForm />
     </main>
   );
 }
