@@ -1,0 +1,8 @@
+.quizzCardSubtopicContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:50px; /*reduce gap between subtopics*/
+    align-items: center;
+
+}

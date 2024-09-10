@@ -1,11 +1,9 @@
-import React from 'react';
-import UploadeForm from './components/FileUploader';
+import DisplayArea from './components/QuizzDisplayArea/DisplayArea';
 
 function Home() {
   return (
     <main>
-      <h1>Hello Next!</h1>
-      <UploadeForm />
+      <DisplayArea />
     </main>
   );
 }

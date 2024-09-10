@@ -1,0 +1,23 @@
+.sideBarContainer{
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    width: 19rem;
+    height: 100vh;
+    padding-right: 32px;
+    padding-left: 50px;
+    background-color:#121212;
+}
+
+.header{
+    background-color: 'inherit';
+    margin-bottom: 16px;
+    display: flex;
+}
+
+.title{
+    font-size: 1.25rem;
+    color: white;
+    margin-bottom: 24px;
+}
+
