@@ -5,6 +5,7 @@ import fs from 'fs';
 import axios from 'axios';
 
 // Ensure the uploads directory exists
+//checking
 const ensureUploadsDirectory = async () => {
   const uploadsDir = path.join(process.cwd(), 'uploads');
   if (!fs.existsSync(uploadsDir)) {
