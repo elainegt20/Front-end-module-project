@@ -118,7 +118,7 @@ const data = {
 };
 
 
-const DisplayArea = () => {
+const DisplayArea = ({data}) => {
 
     return(
         <div className={styles.parentContainer}>

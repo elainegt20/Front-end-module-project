@@ -20,14 +20,14 @@ const generateQuizQuestionsWithAnswers = async (text) => {
     throw new Error('OpenAI API key is not set in environment variables.');
   }
 
-  const prompt = `You are an assistant who generates quiz questions from educational material. Analyze the following text and extract the main topics and subtopics. For each subtopic, generate three multiple-choice quiz questions. Each question should have one correct answer and two incorrect answers. Provide the output in JSON format, organized by topics and subtopics.
+  const prompt = `You are an assistant who generates quiz questions from educational material. Analyze the following text and extract the main topics and subtopics. For each subtopic, generate three multiple-choice quiz questions. Each question should have one correct answer and two incorrect answers. Provide the output in JSON format, organized by topics and subtopics.On the array of anwers include the correct answer too on a random position.
 
   ${text}
 
   Please ensure the structure is as follows:
 
-  {
-    "topics": [
+ 
+    "dashboard": [
       {
         "topic": "Topic Title",
         "subtopics": [
@@ -37,17 +37,20 @@ const generateQuizQuestionsWithAnswers = async (text) => {
               {
                 "question": "Question 1?",
                 "correct_answer": "Correct Answer",
-                "answers": ["Incorrect Answer 1", "Incorrect Answer 2","Correct Answer"]
+                "answers": ["Incorrect Answer 1", "Correct Answer", "Incorrect Answer 2","Incorrect Answer 3"]
+                "completed": false
               },
               {
                 "question": "Question 2?",
                 "correct_answer": "Correct Answer",
-                "answers": ["Incorrect Answer 1", "Incorrect Answer 2","Correct Answer"]
+                "answers": ["Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3","Correct Answer"]
+                "completed": false
               },
               {
                 "question": "Question 3?",
                 "correct_answer": "Correct Answer",
-                "answers": ["Incorrect Answer 1", "Incorrect Answer 2","Correct Answer"]
+                "answers": ["Incorrect Answer 1","Incorrect Answer 2", "Correct Answer",,"Incorrect Answer 3"]
+                "completed": false
               }
             ]
           },
@@ -56,7 +59,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
       },
       ...
     ]
-  }`;
+}`;
 
   try {
     const response = await axios.post(
@@ -143,7 +146,7 @@ export async function POST(request) {
     console.log('Quiz data:', quizData);
 
     // Return the result from OpenAI
-    NextResponse.status(200).json({
+    return NextResponse.json({
       success: true,
       questions: quizData,
     });

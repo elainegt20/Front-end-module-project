@@ -1,9 +1,10 @@
-import DisplayArea from './components/QuizzDisplayArea/DisplayArea';
+//import DisplayArea from './components/QuizzDisplayArea/DisplayArea';
+import FileUploader from './components/fileUploader/FileUploader';
 
 function Home() {
   return (
     <main>
-      <DisplayArea />
+      <FileUploader />
     </main>
   );
 }

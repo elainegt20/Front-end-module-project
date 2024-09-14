@@ -1,14 +1,17 @@
 'use client';
-
+import Link from 'next/link';
 import React from 'react';
 import Button from '@mui/material/Button';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import DisplayArea from '../QuizzDisplayArea/DisplayArea';
+import axios from 'axios';
 
 export default function FileUploader() {
   const [file, setFile] = React.useState(null);
+  //const [data, setData] = React.useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -19,15 +22,25 @@ export default function FileUploader() {
       const data = new FormData();
       data.set('file', file);
 
-      const response = await fetch('/api/upload', data);
+      const response = await axios.post('/api/upload', data);
+
       if (!response.ok) {
         throw new Error(await response.text());
       }
-      console.log(response.questions);
+
+      const result = await response.json();
+
+      //setData(result.questions);
+
+      // Store the data in local storage
+      localStorage.setItem('data', JSON.stringify(result.questions));
+      // Navigate to the QuizPage with query parameters
+      console.log(result.questions);
     } catch (error) {
       console.error(error);
     }
   };
+  //console.log(data);
   return (
     <div>
       <Box
@@ -51,11 +64,14 @@ export default function FileUploader() {
             InputLabelProps={{ shrink: true }}
             sx={{ mb: 2 }}
           />
-          <Button type="submit" variant="contained" color="primary">
-            Upload
-          </Button>
+          <Link href="/quizPage ">
+            <Button type="submit" variant="contained" color="primary">
+              Generate Quiz
+            </Button>
+          </Link>
         </form>
       </Box>
+      {/* {data && <DisplayArea data={data} />} */}
     </div>
   );
 }
