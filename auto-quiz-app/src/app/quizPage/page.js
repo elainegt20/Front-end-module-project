@@ -1,29 +1,54 @@
 'use client';
+
+import React, { useEffect, useState } from 'react';
 import DisplayArea from '../components/QuizzDisplayArea/DisplayArea';
-import React from 'react';
-import { useRouter } from 'next/router';
 
-const quizAreaPage = () => {
-  const [data, setData] = React.useState(null);
+const QuizAreaPage = () => {
+  const [data, setData] = useState(null);
 
-  React.useEffect(() => {
-    const storedData = localStorage.getItem('data');
-    if (storedData) {
-      setData(JSON.parse(storedData)); // Parse and set the data from localStorage  //dashboard: {{topic: "Science", subtopics: Array(2)}, {topic: "Mathematics", subtopics: Array(1)}]
-    }
+  useEffect(() => {
+    const fetchData = () => {
+      const storedData = localStorage.getItem('quizData'); // Make sure this key matches the one used in FileUploader
+      if (storedData) {
+        try {
+          const parsedData = JSON.parse(storedData);
+          setData(parsedData);
+        } catch (error) {
+          console.error('Error parsing stored data:', error);
+          setData(null);
+        }
+      }
+    };
+
+    fetchData();
+
+    // Add event listener for storage changes
+    window.addEventListener('storage', fetchData);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('storage', fetchData);
+    };
   }, []);
 
-  console.log(data);
   return (
     <main>
-      {' '}
       {data && Array.isArray(data.dashboard) ? (
         <DisplayArea data={data} />
       ) : (
-        <div>Loading or Invalid Data</div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          <p style={{ fontSize: '1.25rem' }}>Loading or Invalid Data</p>
+        </div>
       )}
     </main>
   );
 };
 
-export default quizAreaPage;
+export default QuizAreaPage;
