@@ -24,7 +24,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
 
   ${text}
 
-  Please ensure the structure is as follows and on the array of anwers include the correct answer too on a random position.The array of answers should have 4 elements:
+  Please ensure the structure is as follows and on the array of anwers include the correct answer too on a random position.The array of answers should have 4 items, all of them different for each questions, do not repeat the incorrect answers:
 
  
     "dashboard": [
@@ -36,20 +36,20 @@ const generateQuizQuestionsWithAnswers = async (text) => {
             "questions": [
               {
                 "question": "Question 1?",
-                "correct_answer": "Correct Answer",
-                "answers": ["Incorrect Answer 1", "Correct Answer", "Incorrect Answer 2","Incorrect Answer 3"]
+                "correct_answer": "Correct Answer 1",
+                "answers": ["Incorrect Answer 1", "Correct Answer 1", "Incorrect Answer 2","Incorrect Answer 3"]
                 "completed": false
               },
               {
                 "question": "Question 2?",
-                "correct_answer": "Correct Answer",
-                "answers": ["Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3","Correct Answer"]
+                "correct_answer": "Correct Answer 2",
+                "answers": ["Incorrect Answer 4", "Incorrect Answer 6", "Incorrect Answer 5","Correct Answer"]
                 "completed": false
               },
               {
                 "question": "Question 3?",
-                "correct_answer": "Correct Answer",
-                "answers": ["Incorrect Answer 1","Incorrect Answer 2", "Correct Answer",,"Incorrect Answer 3"]
+                "correct_answer": "Correct Answer 3",
+                "answers": ["Incorrect Answer 9","Incorrect Answer 7", "Correct Answer 8",,"Incorrect Answer 3"]
                 "completed": false
               }
             ]

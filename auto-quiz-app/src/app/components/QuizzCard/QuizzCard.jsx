@@ -10,6 +10,17 @@ import styles from './QuizzCard.module.css'
 
 
 const QuizzCard= ({data})=> {
+
+  const [allResults, setAllResults] = React.useState([]);
+
+  const handleAnswerSubmit = (result) => {
+      setAllResults(prevResults => {
+          const nextResults = [...prevResults, result];
+          localStorage.setItem('Results', JSON.stringify(nextResults));
+          console.log(nextResults);
+          return nextResults;
+      });
+  };
  
     return (
         <>
@@ -22,6 +33,7 @@ const QuizzCard= ({data})=> {
                       <QuestionCard
                         key={questionIndex}
                         question={question}
+                        onAnswerSubmit={handleAnswerSubmit}
                       />
                     </Stack>
                   </Paper>

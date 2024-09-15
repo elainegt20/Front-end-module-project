@@ -6,6 +6,7 @@ import SideBarContainer from '../sidebar/SideBarContainer';
 import QuizzCard from '../QuizzCard/QuizzCard';
 import React from 'react';
 import styles from './DisplayArea.module.css'
+import { useRouter } from 'next/navigation';
 
 const data = {
     "dashboard": [
@@ -120,6 +121,13 @@ const data = {
 
 const DisplayArea = ({data}) => {
 
+    const router = useRouter(); // Initialize the router
+
+  // Function to handle button click and navigate to the results page
+  const goToResults = () => {
+    router.push('/resultsPage'); // Navigate to the results page
+  };
+
     return(
         <div className={styles.parentContainer}>
     <div className={styles.sideBarContainer}>
@@ -134,7 +142,9 @@ const DisplayArea = ({data}) => {
         <QuizzCard data={data} />
 
     </div>
-    <footer className={styles.footer}></footer>
+    <footer className={styles.footer}>
+        <button className={styles.button} onClick={goToResults}>go to results</button>
+    </footer>
 </div>
     )
 }
