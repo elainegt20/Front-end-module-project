@@ -1,101 +1,157 @@
 'use client';
 
-import React from 'react'
+import React from 'react';
 import {
   Paper,
   Typography,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Divider,
-} from '@mui/material'
-import { Check, Close } from '@mui/icons-material'
-
-
-
-
+  Box,
+  Container,
+} from '@mui/material';
+import { CheckCircleOutline, CancelOutlined } from '@mui/icons-material';
 
 const Results = () => {
+  const [results, setResults] = React.useState([]);
 
-    const [results, setResults] = React.useState([]);
+  React.useEffect(() => {
+    console.log('AQUI 1');
+    const fetchResults = () => {
+      const storedResults = localStorage.getItem('answers');
 
-    React.useEffect(() => {
-        const fetchResults = () => {
-          const storedResults = localStorage.getItem('Results'); // Make sure this key matches the one used in FileUploader
-          if (storedResults) {
-            try {
-              const parsedResults = JSON.parse(storedResults);
-                setResults(parsedResults);
-                console.log(parsedResults);
-            } catch (error) {
-              console.error('Error parsing stored results:', error);
-              setResults([]);
-            }
-          }
-        };
-    
-        fetchResults();
-    
-        // Add event listener for storage changes
-        window.addEventListener('storage', fetchResults);
-    
-        // Cleanup function
-        return () => {
-          window.removeEventListener('storage', fetchResults);
-        };
-      }, []);
-    return (
-        <Paper elevation={3} sx={{ maxWidth: 600, margin: 'auto', mt: 4, p: 3, bgcolor: 'background.paper' }}>
-          <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'text.primary' }}>
-            Quiz Results
-          </Typography>
-          <List>
-            {results && results.map((result, index) => (
-                <div key={index}>
-                    <Typography variant="h5" component="h2" gutterBottom sx={{ color: 'text.primary', mt: 2 }}>
+      if (storedResults) {
+        try {
+          const parsedResults = JSON.parse(storedResults);
+          setResults(parsedResults);
+          console.log(parsedResults);
+        } catch (error) {
+          console.error('Error parsing stored results:', error);
+          setResults([]);
+        }
+      }
+    };
+
+    fetchResults();
+
+    // Add event listener for storage changes
+    window.addEventListener('storage', fetchResults);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('storage', fetchResults);
+    };
+  }, []);
+
+  return (
+    <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+      <Paper elevation={3} sx={{ p: 3, bgcolor: '#ffffff' }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          align="center"
+          sx={{ fontWeight: 'bold', color: '#000000' }}
+        >
+          Quiz Results
+        </Typography>
+        <List>
+          {results &&
+            results.map((result, index) => (
+              <React.Fragment key={index}>
+                <ListItem
+                  alignItems="flex-start"
+                  sx={{ flexDirection: 'column', py: 2 }}
+                >
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    gutterBottom
+                    sx={{ fontWeight: 'bold', color: '#000000' }}
+                  >
                     {result.topic}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    component="h3"
+                    gutterBottom
+                    sx={{ color: '#000000' }}
+                  >
+                    {result.subtopic}
+                  </Typography>
+                  <Box
+                    sx={{
+                      bgcolor: '#f5f5f5',
+                      p: 2,
+                      borderRadius: 1,
+                      width: '100%',
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 'bold', mb: 1, color: '#000000' }}
+                    >
+                      {result.question}
                     </Typography>
-            
-                    <div>
-                        <Typography variant="h6" component="h3" gutterBottom sx={{ color: 'text.primary', mt: 2 }}>
-                        {result.subtopic}
-                        </Typography>
-                        
-                        <div>
-                            <ListItem alignItems="flex-start" sx={{ flexDirection: 'column' }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'text.primary', mb: 1 }}>
-                                {result.question}
-                            </Typography>
-                            <ListItemIcon sx={{ minWidth: 'auto', mr: 1, color: 'error.main' }}>
-                                {result.yourAnswer === result.correctAnswer ? <Check /> : <Close />}
-                            </ListItemIcon>
-                            <ListItemText
-                                primary="Your answer:"
-                                secondary={result.yourAnswer}
-                                sx={{
-                                '& .MuiListItemText-primary': { color: 'text.primary' },
-                                '& .MuiListItemText-secondary': { color: 'text.secondary' },
-                                }}
-                            />
-                            <ListItemText
-                                primary={`Correct answer: ${result.correctAnswer}`}
-                                sx={{
-                                '& .MuiListItemText-primary': { color: 'text.primary' },
-                                '& .MuiListItemText-secondary': { color: 'text.secondary' },
-                                }}
-                            />
-                            </ListItem>
-                            {index < results.length - 1 && <Divider variant="fullWidth" component="li" />}
-                        </div>
-                        
-                    </div>
-                    
-              </div>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        mb: 1,
+                        backgroundColor: 'white',
+                      }}
+                    >
+                      {result.yourAnswer === result.correctAnswer ? (
+                        <CheckCircleOutline sx={{ color: '#000000', mr: 1 }} />
+                      ) : (
+                        <CancelOutlined sx={{ color: '#000000', mr: 1 }} />
+                      )}
+                      <ListItemText
+                        primary="Your answer:"
+                        secondary={result.yourAnswer}
+                        sx={{
+                          '& .MuiListItemText-primary': {
+                            fontWeight: 'bold',
+                            color: '#000000',
+                          },
+                          '& .MuiListItemText-secondary': {
+                            color: '#000000',
+                            fontWeight:
+                              result.yourAnswer === result.correctAnswer
+                                ? 'bold'
+                                : 'normal',
+                          },
+                        }}
+                      />
+                    </Box>
+                    <Box sx={{ ml: 4 }}>
+                      <ListItemText
+                        primary="Correct answer:"
+                        secondary={result.correctAnswer}
+                        sx={{
+                          '& .MuiListItemText-primary': {
+                            fontWeight: 'bold',
+                            color: '#000000',
+                          },
+                          '& .MuiListItemText-secondary': {
+                            fontWeight: 'bold',
+                            color: '#000000',
+                          },
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </ListItem>
+                {index < results.length - 1 && (
+                  <Divider component="li" sx={{ bgcolor: '#000000' }} />
+                )}
+              </React.Fragment>
             ))}
-          </List>
-        </Paper>
-      )
-}
+        </List>
+      </Paper>
+    </Container>
+  );
+};
 
-export default Results
+export default Results;

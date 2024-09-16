@@ -1,12 +1,19 @@
 'use client';
 
 import React from 'react';
-import { Button, TextField, Box, Typography } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Box,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 export default function FileUploader() {
   const [file, setFile] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   const fileInputRef = React.useRef(null);
   const router = useRouter();
 
@@ -14,6 +21,8 @@ export default function FileUploader() {
     e.preventDefault();
 
     if (!file) return;
+
+    setLoading(true);
 
     try {
       const data = new FormData();
@@ -40,6 +49,7 @@ export default function FileUploader() {
       router.push('/quizPage');
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
@@ -64,9 +74,15 @@ export default function FileUploader() {
           variant="outlined"
           InputLabelProps={{ shrink: true }}
           sx={{ mb: 2 }}
+          accept=".txt"
         />
-        <Button type="submit" variant="contained" color="primary">
-          Generate Quiz
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={loading}
+        >
+          {loading ? <CircularProgress size={24} /> : 'Generate Quiz'}
         </Button>
       </form>
     </Box>

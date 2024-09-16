@@ -35,19 +35,21 @@ const generateQuizQuestionsWithAnswers = async (text) => {
             "subtopic": "Subtopic Title",
             "questions": [
               {
+                "global_question_index": 0,
                 "question": "Question 1?",
                 "correct_answer": "Correct Answer 1",
                 "answers": ["Incorrect Answer 1", "Correct Answer 1", "Incorrect Answer 2","Incorrect Answer 3"]
                 "completed": false
               },
               {
+                "global_question_index": 1,
                 "question": "Question 2?",
                 "correct_answer": "Correct Answer 2",
                 "answers": ["Incorrect Answer 4", "Incorrect Answer 6", "Incorrect Answer 5","Correct Answer"]
                 "completed": false
               },
               {
-                "question": "Question 3?",
+                "global_question_index": 2,
                 "correct_answer": "Correct Answer 3",
                 "answers": ["Incorrect Answer 9","Incorrect Answer 7", "Correct Answer 8",,"Incorrect Answer 3"]
                 "completed": false
