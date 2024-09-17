@@ -4,9 +4,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Check } from 'lucide-react';
 import Typography from '@mui/material/Typography';
 
-
-const SubtopicListItem = ({ subtopic }) => {
-
+const SubtopicListItem = ({ subtopic, completed }) => {
   return (
     <ListItem
       sx={{
@@ -18,7 +16,11 @@ const SubtopicListItem = ({ subtopic }) => {
         borderRadius: '0 1000px 1000px 0',
       }}
     >
-      <Check color="#4caf50" size={16} style={{ marginRight: '12px', flexShrink: 0 }} />
+      <Check
+        color={completed ? '#4caf50' : 'grey'}
+        size={16}
+        style={{ marginRight: '12px', flexShrink: 0 }}
+      />
       <ListItemText
         primary={
           <Typography variant="body1" sx={{ color: 'white' }}>
@@ -30,8 +32,7 @@ const SubtopicListItem = ({ subtopic }) => {
   );
 };
 
-const MenuList = ({data}) => {
-
+const MenuList = ({ data, completionStatus }) => {
   return (
     <List
       sx={{
@@ -56,21 +57,30 @@ const MenuList = ({data}) => {
               borderRadius: '0 1000px 1000px 0',
             }}
           >
-            
-            <Check color="grey" size={20} style={{ marginRight: '12px', flexShrink: 0 }} />
+            <Check
+              color={
+                completionStatus[index].topicCompleted ? '#4caf50' : 'grey'
+              }
+              size={20}
+              style={{ marginRight: '12px', flexShrink: 0 }}
+            />
             <ListItemText
               primary={
-                <Typography variant="body1" sx={{ color: 'white', fontWeight: 'bold' }}>
+                <Typography
+                  variant="body1"
+                  sx={{ color: 'white', fontWeight: 'bold' }}
+                >
                   {quizz.topic}
                 </Typography>
               }
             />
           </ListItem>
           {quizz.subtopics.map((subtopic, subIndex) => (
-            
-            <SubtopicListItem key={`${index}-${subIndex}`} subtopic={subtopic} />
-
-          
+            <SubtopicListItem
+              key={`${index}-${subIndex}`}
+              subtopic={subtopic}
+              completed={completionStatus[index].subtopics[subIndex]}
+            />
           ))}
         </div>
       ))}
@@ -78,5 +88,3 @@ const MenuList = ({data}) => {
   );
 };
 export default MenuList;
-
-

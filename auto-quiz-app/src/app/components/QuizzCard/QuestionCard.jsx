@@ -3,8 +3,18 @@
 import React, { useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 
-const QuestionCard = ({ questionIndex, question, onAnswerSubmit }) => {
+const QuestionCard = ({
+  questionIndex,
+  question,
+  onAnswerSubmit,
+  onComplete,
+}) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const handleComplete = () => {
+    setIsCompleted(!isCompleted);
+    onComplete();
+  };
 
   const handleButtonClick = (index) => {
     setSelectedAnswer(index);
@@ -44,7 +54,10 @@ const QuestionCard = ({ questionIndex, question, onAnswerSubmit }) => {
               borderWidth: 1,
             },
           }}
-          onClick={() => handleButtonClick(index)}
+          onClick={() => {
+            handleButtonClick(index);
+            handleComplete();
+          }}
         >
           {answer}
         </Button>

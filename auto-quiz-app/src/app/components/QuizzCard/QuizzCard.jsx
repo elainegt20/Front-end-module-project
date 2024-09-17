@@ -6,7 +6,7 @@ import QuestionCard from './QuestionCard';
 
 import styles from './QuizzCard.module.css';
 
-const QuizzCard = ({ data, setAnswers }) => {
+const QuizzCard = ({ data, setAnswers, onQuestionComplete }) => {
   const handleAnswerSubmit = (answer) => {
     setAnswers((prevAnswers) => {
       const nextResults = { ...prevAnswers, ...answer };
@@ -34,6 +34,13 @@ const QuizzCard = ({ data, setAnswers }) => {
                     questionIndex={question.global_question_index}
                     question={question}
                     onAnswerSubmit={handleAnswerSubmit}
+                    onComplete={() =>
+                      onQuestionComplete(
+                        quizzIndex,
+                        subtopicIndex,
+                        questionIndex,
+                      )
+                    }
                   />
                 </Stack>
               </Paper>

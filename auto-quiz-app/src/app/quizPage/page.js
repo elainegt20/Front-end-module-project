@@ -34,7 +34,7 @@ const QuizAreaPage = () => {
   return (
     <main>
       {data && Array.isArray(data.dashboard) ? (
-        <DisplayArea data={data} />
+        <DisplayArea data={data} setData={setData} />
       ) : (
         <div
           style={{
