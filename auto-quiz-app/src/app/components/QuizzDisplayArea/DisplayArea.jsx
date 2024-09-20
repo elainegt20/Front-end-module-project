@@ -22,7 +22,7 @@ const DisplayArea = ({ data, setData }) => {
   const [completionStatus, setCompletionStatus] = React.useState(
     data.dashboard.map((topic) => ({
       topicCompleted: false,
-      subtopics: topic.subtopics.map(() => false),
+      subtopics: Array(topic.subtopics.length).fill(false),
     })),
   );
 
@@ -32,7 +32,7 @@ const DisplayArea = ({ data, setData }) => {
       newData.dashboard[topicIndex].subtopics[subtopicIndex].questions[
         questionIndex
       ];
-    question.completed = !question.completed;
+    question.completed = true;
     setData(newData);
 
     const newCompletionStatus = [...completionStatus];
@@ -59,9 +59,6 @@ const DisplayArea = ({ data, setData }) => {
       );
     }, 0);
 
-    console.log(answers);
-    console.log('totalQuestions:', totalQuestions);
-    console.log('answers:', answers);
     if (totalQuestions !== Object.keys(answers).length) {
       setOpen(true);
       return;
