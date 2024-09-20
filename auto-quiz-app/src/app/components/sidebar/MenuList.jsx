@@ -4,17 +4,20 @@ import ListItemText from '@mui/material/ListItemText';
 import { Check } from 'lucide-react';
 import Typography from '@mui/material/Typography';
 
-const SubtopicListItem = ({ subtopic, completed }) => {
+const SubtopicListItem = ({ subtopic, completed, setSubtopic }) => {
   return (
     <ListItem
       sx={{
         paddingLeft: '28px',
         marginBottom: '8px',
+        height: '32px',
+        width: '100%',
         '&:hover': {
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
         },
         borderRadius: '0 1000px 1000px 0',
       }}
+      onClick={() => setSubtopic(subtopic.subtopic)}
     >
       <Check
         color={completed ? '#4caf50' : 'grey'}
@@ -32,7 +35,7 @@ const SubtopicListItem = ({ subtopic, completed }) => {
   );
 };
 
-const MenuList = ({ data, completionStatus }) => {
+const MenuList = ({ data, completionStatus, setSubtopic }) => {
   return (
     <List
       sx={{
@@ -47,14 +50,15 @@ const MenuList = ({ data, completionStatus }) => {
         <div key={index}>
           <ListItem
             sx={{
-              padding: 0,
+              paddingLeft: '16px',
               marginBottom: '8px',
-              height: '32px',
+              height: '48px',
+              width: '100%',
               position: 'relative',
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
               },
-              borderRadius: '0 1000px 1000px 0',
+              borderRadius: '16px',
             }}
           >
             <Check
@@ -80,6 +84,7 @@ const MenuList = ({ data, completionStatus }) => {
               key={`${index}-${subIndex}`}
               subtopic={subtopic}
               completed={completionStatus[index].subtopics[subIndex]}
+              setSubtopic={setSubtopic}
             />
           ))}
         </div>

@@ -1,12 +1,12 @@
+'use client';
 
-'use client'
-
-import Results from "../components/resultsPanel/Results"
+import Results from '../components/resultsPanel/Results';
+import UtilButton from '../components/Button/Button';
 import { useRouter } from 'next/navigation';
+import styles from './resultsPage.module.css';
 
 const ResultsPage = () => {
-
-    const router = useRouter(); // Initialize the router
+  const router = useRouter(); // Initialize the router
 
   // Function to handle button click and navigate to the results page
   const newQuiz = () => {
@@ -15,13 +15,19 @@ const ResultsPage = () => {
   const retakeQuiz = () => {
     router.push('/quizPage'); // Navigate to the results page
   };
-    return (
-        <div>
-        <Results />
-        <button onClick={newQuiz}>take another quiz</button>
-        <button onClick={retakeQuiz}>retake quiz</button>
-        </div>
-    )
-}
+  return (
+    <div className={styles.container}>
+      <Results />
+      <div className={styles.buttons}>
+        <UtilButton color="black" backgroundColor="white" onClick={newQuiz}>
+          New Quiz
+        </UtilButton>
+        <UtilButton color="black" backgroundColor="white" onClick={retakeQuiz}>
+          Retake Quiz
+        </UtilButton>
+      </div>
+    </div>
+  );
+};
 
-export default ResultsPage
+export default ResultsPage;

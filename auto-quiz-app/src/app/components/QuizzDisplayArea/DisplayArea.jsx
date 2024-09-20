@@ -6,11 +6,18 @@ import SideBarContainer from '../sidebar/SideBarContainer';
 import QuizzCard from '../QuizzCard/QuizzCard';
 import React from 'react';
 import styles from './DisplayArea.module.css';
+import { Typography } from '@mui/material';
+import CheckModal from '../modal/Modal';
+import UtilButton from '../Button/Button';
 import { useRouter } from 'next/navigation';
 
 const DisplayArea = ({ data, setData }) => {
   const router = useRouter();
   const [answers, setAnswers] = React.useState({});
+  const [subtopic, setSubtopic] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => setOpen(false);
 
   const [completionStatus, setCompletionStatus] = React.useState(
     data.dashboard.map((topic) => ({
@@ -56,7 +63,7 @@ const DisplayArea = ({ data, setData }) => {
     console.log('totalQuestions:', totalQuestions);
     console.log('answers:', answers);
     if (totalQuestions !== Object.keys(answers).length) {
-      alert('Please answer all questions before proceeding');
+      setOpen(true);
       return;
     }
 
@@ -69,8 +76,12 @@ const DisplayArea = ({ data, setData }) => {
       <div className={styles.sideBarContainer}>
         <SideBarContainer>
           <Header />
-          <TitleSection />
-          <MenuList data={data} completionStatus={completionStatus} />
+          <TitleSection data={data} />
+          <MenuList
+            data={data}
+            completionStatus={completionStatus}
+            setSubtopic={setSubtopic}
+          />
         </SideBarContainer>
       </div>
       <div className={styles.navBarContainer}></div>
@@ -79,12 +90,16 @@ const DisplayArea = ({ data, setData }) => {
           data={data}
           setAnswers={setAnswers}
           onQuestionComplete={handleQuestionComplete}
+          subtopic={subtopic}
         />
       </div>
       <footer className={styles.footer}>
-        <button className={styles.button} onClick={goToResults}>
-          go to results
-        </button>
+        <UtilButton onClick={goToResults} color="black" backgroundColor="white">
+          <Typography variant="h6" sx={{ color: 'black', fontWeight: 'bold' }}>
+            Go to Results
+          </Typography>
+        </UtilButton>
+        <CheckModal open={open} onClose={handleClose} />
       </footer>
     </div>
   );

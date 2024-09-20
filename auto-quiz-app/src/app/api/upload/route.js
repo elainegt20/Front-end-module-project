@@ -24,10 +24,10 @@ const generateQuizQuestionsWithAnswers = async (text) => {
 
   ${text}
 
-  Please ensure the structure is as follows and on the array of anwers include the correct answer too on a random position.The array of answers should have 4 items, all of them different for each questions, do not repeat the incorrect answers:
+  Please ensure the structure is as follows and on the array of anwers include the correct answer too on a random position.The array of answers should have 4 anwers, all of them different for each questions. Quiz topic and subtopicn should have 1-2 words:
 
  
-    "dashboard": [
+   { "numberOfTotalQuestions":number, "quizName": Quiz Name, "dashboard": [
       {
         "topic": "Topic Title",
         "subtopics": [
@@ -61,7 +61,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
       },
       ...
     ]
-}`;
+}}`;
 
   try {
     const response = await axios.post(
@@ -69,7 +69,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
       {
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 1500,
+        max_tokens: 3000,
         n: 1,
         stop: null,
         temperature: 0.7,

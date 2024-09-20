@@ -2,7 +2,7 @@
 .parentContainer {
     background-color: black;
     display: grid;
-    grid-template-columns: minmax(280px, auto) 1fr;
+    grid-template-columns: minmax(350px, auto) 1fr;
     grid-template-rows: 64px 1fr auto;
     gap: 0;
     height: 100vh;
@@ -32,6 +32,7 @@
   }
   
   .quizzContainer {
+    margin-left:100px;
     grid-column: 2 / -1;
     grid-row: 2 / 3;
     background-color: white;

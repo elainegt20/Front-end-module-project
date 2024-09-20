@@ -33,7 +33,7 @@ const QuizAreaPage = () => {
 
   return (
     <main>
-      {data && Array.isArray(data.dashboard) ? (
+      {data ? (
         <DisplayArea data={data} setData={setData} />
       ) : (
         <div
@@ -44,7 +44,7 @@ const QuizAreaPage = () => {
             height: '100vh',
           }}
         >
-          <p style={{ fontSize: '1.25rem' }}>Loading or Invalid Data</p>
+          <h1>Invalid Data</h1>
         </div>
       )}
     </main>

@@ -1,8 +1,9 @@
 .sideBarContainer{
+    position: fixed;
     display: flex;
     flex-direction: column;
     z-index: 1;
-    width: 19rem;
+    width: 300px;
     height: 100vh;
     padding-right: 32px;
     padding-left: 50px;
