@@ -1,0 +1,29 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Levels of Biological Organization\
+Life is organized into several levels, from the smallest to the largest:\
+Molecule: The chemical level, including DNA, proteins, and other molecules essential to life.\
+\
+Cell: The smallest unit of life, cells are the basic building blocks of all living organisms.\
+\
+Tissue: Groups of cells that work together to perform specific functions.\
+\
+Organ: A group of tissues that work together to perform a specific task, such as the heart, lungs, or stomach.\
+\
+Organ System: A group of organs that work together to perform complex bodily functions, such as the circulatory or digestive system.\
+\
+Organism: A living individual, such as a human, animal, plant, or microorganism, which can function independently.\
+\
+Population: A group of organisms of the same species that live in a specific area.\
+\
+Community: All the populations of different species that live together in a specific area and interact with each other.\
+\
+Ecosystem: All the living organisms in a community and the non-living environment they interact with, such as air, water, and soil.\
+\
+Biosphere: The global sum of all ecosystems, including all living organisms and their interactions with the Earth's atmosphere, oceans, and land.\
+}
