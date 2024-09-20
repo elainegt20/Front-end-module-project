@@ -1,17 +1,17 @@
 'use client';
-import MenuList from '../sidebar/MenuList';
-import Header from '../sidebar/Header';
-import TitleSection from '../sidebar/TitleSection';
-import SideBarContainer from '../sidebar/SideBarContainer';
+import MenuList from '../Sidebar/MenuList';
+import Header from '../Sidebar/Header';
+import TitleSection from '../Sidebar/TitleSection';
+import SideBarContainer from '../Sidebar/SideBarContainer';
 import QuizzCard from '../QuizzCard/QuizzCard';
 import React from 'react';
 import styles from './DisplayArea.module.css';
 import { Typography } from '@mui/material';
-import CheckModal from '../modal/Modal';
+import CheckModal from '../Modal/Modal';
 import UtilButton from '../Button/Button';
 import { useRouter } from 'next/navigation';
 
-const DisplayArea = ({ data, setData }) => {
+const QuizDisplayArea = ({ data, setData }) => {
   const router = useRouter();
   const [answers, setAnswers] = React.useState({});
   const [subtopic, setSubtopic] = React.useState('');
@@ -65,7 +65,7 @@ const DisplayArea = ({ data, setData }) => {
     }
 
     localStorage.setItem('answers', JSON.stringify(Object.values(answers)));
-    router.push('/resultsPage');
+    router.push('/pages/resultsPage');
   };
 
   return (
@@ -102,4 +102,4 @@ const DisplayArea = ({ data, setData }) => {
   );
 };
 
-export default DisplayArea;
+export default QuizDisplayArea;

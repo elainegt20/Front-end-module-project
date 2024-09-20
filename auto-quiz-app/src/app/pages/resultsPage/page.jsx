@@ -1,7 +1,7 @@
 'use client';
 
-import Results from '../components/resultsPanel/Results';
-import UtilButton from '../components/Button/Button';
+import Results from '../../components/ResultsPanel/ResultsPanel';
+import UtilButton from '../../components/Button/Button';
 import { useRouter } from 'next/navigation';
 import styles from './resultsPage.module.css';
 
@@ -13,7 +13,7 @@ const ResultsPage = () => {
     router.push('/'); // Navigate to the results page
   };
   const retakeQuiz = () => {
-    router.push('/quizPage'); // Navigate to the results page
+    router.push('/pages/quizPage'); // Navigate to the results page
   };
   return (
     <div className={styles.container}>

@@ -1,5 +1,5 @@
 //import DisplayArea from './components/QuizzDisplayArea/DisplayArea';
-import FileUploader from './components/fileUploader/FileUploader';
+import FileUploader from './components/FileUploader/FileUploader';
 
 function Home() {
   return (

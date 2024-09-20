@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { CheckCircleOutline, CancelOutlined } from '@mui/icons-material';
 
-const Results = () => {
+const ResultsPanel = () => {
   const [results, setResults] = React.useState([]);
   console.log('aqui', results);
   React.useEffect(() => {
@@ -154,4 +154,4 @@ const Results = () => {
   );
 };
 
-export default Results;
+export default ResultsPanel;

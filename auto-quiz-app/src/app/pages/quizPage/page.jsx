@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import DisplayArea from '../components/QuizzDisplayArea/DisplayArea';
+import DisplayArea from '../../components/QuizzDisplayArea/QuizDisplayArea';
 
 const QuizAreaPage = () => {
   const [data, setData] = useState(null);

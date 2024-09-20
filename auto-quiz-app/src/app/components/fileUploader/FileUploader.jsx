@@ -50,7 +50,7 @@ export default function FileUploader() {
       localStorage.setItem('quizData', JSON.stringify(result.questions));
 
       // Navigate to the quiz page
-      router.push('/quizPage');
+      router.push('/pages/quizPage');
     } catch (error) {
       console.error(error);
       setLoading(false);
