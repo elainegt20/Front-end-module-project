@@ -1,0 +1,20 @@
+﻿Workflow:
+* Uploading Document:
+   * Upload → processed via API → OpenAI API formats data → stored locally.
+   * Valid files trigger quiz area display, invalid files return to homepage with a modal.
+* Quiz Display & Unanswered Questions:
+   * Topics and subtopics organized in a sidebar.
+   * Sidebar tracks progress (turns green for completed topics).
+   * Unanswered questions remain gray; users are prompted via modal.
+* Viewing Results & Retake:
+   * Users can view results, retake the quiz, or start a new one.
+   * Sidebar hides on smaller screens for better user experience.
+Highlights:
+* OpenAI Integration:
+   * Used OpenAI API to format quiz content based on user input.
+* Navigation (router.push vs. Link):
+   * router.push for programmatic navigation with dynamic logic.
+   * Link for static, user-initiated navigation.
+* Next.js Components:
+   * Server components render on the server, client components on both server and client.
+   * Solution: Server components as children of client components for performance optimization.

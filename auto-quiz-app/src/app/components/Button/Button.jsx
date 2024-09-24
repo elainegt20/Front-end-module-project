@@ -1,11 +1,6 @@
 import Button from '@mui/material/Button';
 
-const UtilButton = ({
-  children,
-  onClick,
-  color = 'white',
-  backgroundColor = 'black',
-}) => {
+const UtilButton = ({ children, onClick, color, backgroundColor }) => {
   return (
     <Button
       sx={{

@@ -1,10 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import DisplayArea from '../components/QuizzDisplayArea/DisplayArea';
+import { useRouter } from 'next/navigation';
+import CheckModal from '../../components/Modal/Modal';
+import DisplayArea from '../../components/QuizzDisplayArea/QuizDisplayArea';
 
 const QuizAreaPage = () => {
+  const router = useRouter();
   const [data, setData] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    router.push('/');
+  };
 
   useEffect(() => {
     const fetchData = () => {
@@ -13,10 +22,14 @@ const QuizAreaPage = () => {
         try {
           const parsedData = JSON.parse(storedData);
           setData(parsedData);
+          setOpen(false);
         } catch (error) {
           console.error('Error parsing stored data:', error);
           setData(null);
+          setOpen(true);
         }
+      } else {
+        setOpen(true); // Open the modal if no data is found
       }
     };
 
@@ -44,7 +57,11 @@ const QuizAreaPage = () => {
             height: '100vh',
           }}
         >
-          <h1>Invalid Data</h1>
+          <CheckModal
+            open={open}
+            onClose={handleClose}
+            message={'Invalid Data'}
+          />
         </div>
       )}
     </main>

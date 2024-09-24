@@ -1,17 +1,16 @@
 'use client';
-import MenuList from '../sidebar/MenuList';
-import Header from '../sidebar/Header';
-import TitleSection from '../sidebar/TitleSection';
-import SideBarContainer from '../sidebar/SideBarContainer';
+import MenuList from '../Sidebar/MenuList';
+import TitleSection from '../Sidebar/TitleSection';
+import SideBarContainer from '../Sidebar/SideBarContainer';
 import QuizzCard from '../QuizzCard/QuizzCard';
 import React from 'react';
 import styles from './DisplayArea.module.css';
 import { Typography } from '@mui/material';
-import CheckModal from '../modal/Modal';
+import CheckModal from '../Modal/Modal';
 import UtilButton from '../Button/Button';
 import { useRouter } from 'next/navigation';
 
-const DisplayArea = ({ data, setData }) => {
+const QuizDisplayArea = ({ data, setData }) => {
   const router = useRouter();
   const [answers, setAnswers] = React.useState({});
   const [subtopic, setSubtopic] = React.useState('');
@@ -22,7 +21,7 @@ const DisplayArea = ({ data, setData }) => {
   const [completionStatus, setCompletionStatus] = React.useState(
     data.dashboard.map((topic) => ({
       topicCompleted: false,
-      subtopics: topic.subtopics.map(() => false),
+      subtopics: Array(topic.subtopics.length).fill(false),
     })),
   );
 
@@ -32,7 +31,7 @@ const DisplayArea = ({ data, setData }) => {
       newData.dashboard[topicIndex].subtopics[subtopicIndex].questions[
         questionIndex
       ];
-    question.completed = !question.completed;
+    question.completed = true;
     setData(newData);
 
     const newCompletionStatus = [...completionStatus];
@@ -59,23 +58,20 @@ const DisplayArea = ({ data, setData }) => {
       );
     }, 0);
 
-    console.log(answers);
-    console.log('totalQuestions:', totalQuestions);
-    console.log('answers:', answers);
     if (totalQuestions !== Object.keys(answers).length) {
       setOpen(true);
       return;
     }
 
     localStorage.setItem('answers', JSON.stringify(Object.values(answers)));
-    router.push('/resultsPage');
+    router.push('/pages/resultsPage');
   };
 
   return (
     <div className={styles.parentContainer}>
       <div className={styles.sideBarContainer}>
         <SideBarContainer>
-          <Header />
+          {/* <Header /> */}
           <TitleSection data={data} />
           <MenuList
             data={data}
@@ -99,10 +95,16 @@ const DisplayArea = ({ data, setData }) => {
             Go to Results
           </Typography>
         </UtilButton>
-        <CheckModal open={open} onClose={handleClose} />
+        <CheckModal
+          open={open}
+          onClose={handleClose}
+          message={
+            'Please complete all questions before proceeding to results.'
+          }
+        />
       </footer>
     </div>
   );
 };
 
-export default DisplayArea;
+export default QuizDisplayArea;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Typography, Button, Box } from '@mui/material';
 
-const CheckModal = ({ open, onClose }) => {
+const CheckModal = ({ open, onClose, message }) => {
   return (
     <Modal
       open={open}
@@ -42,7 +42,7 @@ const CheckModal = ({ open, onClose }) => {
             mb: 2,
           }}
         >
-          Please complete all questions before proceeding to results.
+          {message}
         </Typography>
         <Button
           onClick={onClose}

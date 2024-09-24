@@ -2,16 +2,13 @@
 
 import React from 'react';
 import {
-  Card,
-  CardContent,
-  Upload,
   Button,
   TextField,
   Box,
   Typography,
   CircularProgress,
 } from '@mui/material';
-import UtilButton from '../Button/Button';
+
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -50,7 +47,7 @@ export default function FileUploader() {
       localStorage.setItem('quizData', JSON.stringify(result.questions));
 
       // Navigate to the quiz page
-      router.push('/quizPage');
+      router.push('/pages/quizPage');
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -60,17 +57,20 @@ export default function FileUploader() {
   return (
     <Box
       sx={{
-        p: 4, // Increase padding for a larger box
+        p: 6, // Increase padding for a larger box
         border: '1px dashed grey',
         borderRadius: 2,
         textAlign: 'center',
-        maxWidth: 600, // Increase max width for a larger box
+        width: '80%', // Increase width for a larger box
+        maxWidth: 800, // Set a max width to prevent it from being too large
         bgcolor: 'white',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        display: 'flex',
+        flexDirection: 'column', // Arrange items in a column
+        alignItems: 'center', // Center items horizontally
+        justifyContent: 'center', // Center items vertically
+        mx: 'auto', // Center the box horizontally
+        my: 4, // Add vertical margin to center the box vertically
       }}
     >
       <Typography
@@ -80,7 +80,7 @@ export default function FileUploader() {
       >
         Upload Your File
       </Typography>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} style={{ width: '100%', maxWidth: 600 }}>
         <TextField
           type="file"
           onChange={(e) => setFile(e.target.files?.[0] || null)}
@@ -89,6 +89,7 @@ export default function FileUploader() {
           InputLabelProps={{ shrink: true }}
           sx={{
             mb: 3, // Increase margin bottom for more spacing
+            width: '100%', // Make the input field take full width
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
                 borderColor: 'black',
@@ -124,6 +125,8 @@ export default function FileUploader() {
             },
             fontSize: '1.2rem', // Increase font size for a larger button
             padding: '10px 20px', // Increase padding for a larger button
+            width: '100%', // Make the button take full width
+            paddingLeft: '50px',
           }}
           disabled={loading}
         >
@@ -146,40 +149,4 @@ export default function FileUploader() {
       </form>
     </Box>
   );
-}
-
-{
-  /* <Box
-sx={{
-  p: 2,
-  border: '1px dashed grey',
-  borderRadius: 2,
-  textAlign: 'center',
-  maxWidth: 400,
-}}
->
-<Typography variant="h6" gutterBottom>
-  Upload Your File
-</Typography>
-<form onSubmit={onSubmit}>
-  <TextField
-    type="file"
-    onChange={(e) => setFile(e.target.files?.[0] || null)}
-    inputRef={fileInputRef}
-    variant="outlined"
-    InputLabelProps={{ shrink: true }}
-    sx={{ mb: 2 }}
-    accept=".txt"
-  />
-  <Button
-    type="submit"
-    variant="contained"
-    color="primary"
-    disabled={loading}
-  >
-    {loading ? <CircularProgress size={24} /> : 'Generate Quiz'}
-  </Button>
-</form>
-</Box>
-); */
 }

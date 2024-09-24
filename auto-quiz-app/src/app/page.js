@@ -1,12 +1,11 @@
-//import DisplayArea from './components/QuizzDisplayArea/DisplayArea';
-import FileUploader from './components/fileUploader/FileUploader';
+import HomeDisplayArea from './components/Home/HomeDisplayArea';
 
-function Home() {
+const Home = () => {
   return (
-    <main>
-      <FileUploader />
-    </main>
+    <>
+      <HomeDisplayArea />
+    </>
   );
-}
+};
 
 export default Home;

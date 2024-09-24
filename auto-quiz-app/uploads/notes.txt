@@ -1,0 +1,17 @@
+React Basics:
+Components and JSX:
+Components are the building blocks of React applications.
+JSX is a syntax used within React to write what looks like HTML but in JavaScript.
+Example: <div>Hello, {name}</div>.
+State and Props:
+State: Internal data managed within a component (useState for functional components).
+Props: External data passed from a parent component to a child component.
+React Intermediate:
+Hooks:
+
+useEffect: Manages side effects like data fetching and subscriptions.
+useContext: Enables state or data sharing across components without prop drilling.
+Lifecycle Methods vs. Hooks:
+
+In class components, lifecycle methods (e.g., componentDidMount) control component behavior over time.
+Functional components rely on hooks (useEffect) to achieve the same behavior.
