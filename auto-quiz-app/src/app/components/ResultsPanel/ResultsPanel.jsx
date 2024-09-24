@@ -15,9 +15,8 @@ import { CheckCircleOutline, CancelOutlined } from '@mui/icons-material';
 
 const ResultsPanel = () => {
   const [results, setResults] = React.useState([]);
-  console.log('aqui', results);
+
   React.useEffect(() => {
-    console.log('AQUI 1');
     const fetchResults = () => {
       const storedResults = localStorage.getItem('answers');
 

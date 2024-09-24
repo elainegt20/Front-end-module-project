@@ -6,14 +6,13 @@ import { useRouter } from 'next/navigation';
 import styles from './resultsPage.module.css';
 
 const ResultsPage = () => {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
 
-  // Function to handle button click and navigate to the results page
   const newQuiz = () => {
-    router.push('/'); // Navigate to the results page
+    router.push('/');
   };
   const retakeQuiz = () => {
-    router.push('/pages/quizPage'); // Navigate to the results page
+    router.push('/pages/quizPage');
   };
   return (
     <div className={styles.container}>

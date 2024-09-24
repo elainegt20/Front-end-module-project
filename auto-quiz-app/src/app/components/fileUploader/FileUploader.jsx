@@ -57,24 +57,24 @@ export default function FileUploader() {
   return (
     <Box
       sx={{
-        p: 6, // Increase padding for a larger box
+        p: 6,
         border: '1px dashed grey',
         borderRadius: 2,
         textAlign: 'center',
-        width: '80%', // Increase width for a larger box
-        maxWidth: 800, // Set a max width to prevent it from being too large
+        width: '80%',
+        maxWidth: 800,
         bgcolor: 'white',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         display: 'flex',
-        flexDirection: 'column', // Arrange items in a column
-        alignItems: 'center', // Center items horizontally
-        justifyContent: 'center', // Center items vertically
-        mx: 'auto', // Center the box horizontally
-        my: 4, // Add vertical margin to center the box vertically
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        mx: 'auto',
+        my: 4,
       }}
     >
       <Typography
-        variant="h4" // Increase font size for a larger title
+        variant="h4"
         gutterBottom
         sx={{ color: 'black', fontWeight: 'bold' }}
       >
@@ -86,10 +86,9 @@ export default function FileUploader() {
           onChange={(e) => setFile(e.target.files?.[0] || null)}
           inputRef={fileInputRef}
           variant="outlined"
-          InputLabelProps={{ shrink: true }}
           sx={{
-            mb: 3, // Increase margin bottom for more spacing
-            width: '100%', // Make the input field take full width
+            mb: 3,
+            width: '100%',
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
                 borderColor: 'black',
