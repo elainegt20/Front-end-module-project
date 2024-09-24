@@ -1,0 +1,5 @@
+﻿Cell Structure and Function
+* Cell Theory: All living organisms are composed of cells. Cells are the basic unit of life and all cells come from pre-existing cells.
+* Types of Cells:
+   * Prokaryotic Cells: Do not have a nucleus or other membrane-bound organelles. Example: Bacteria.
+   * Eukaryotic Cells: Have a nucleus and other membrane-bound organelles. Example: Animal and plant cells.

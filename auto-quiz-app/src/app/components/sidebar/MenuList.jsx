@@ -12,6 +12,7 @@ const SubtopicListItem = ({ subtopic, completed, setSubtopic }) => {
         marginBottom: '8px',
         height: '32px',
         width: '100%',
+        cursor: 'pointer',
         '&:hover': {
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
         },
@@ -54,6 +55,7 @@ const MenuList = ({ data, completionStatus, setSubtopic }) => {
               marginBottom: '8px',
               height: '48px',
               width: '100%',
+              cursor: 'pointer',
               position: 'relative',
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',

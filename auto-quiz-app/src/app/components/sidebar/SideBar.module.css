@@ -10,10 +10,24 @@
     background-color:#121212;
 }
 
+.sideBarContainer.close {
+    left: -400px; /* Adjust this value as needed */
+  transition: left 0.3s ease;
+  }
+
+  .sideBarContainer.open {
+    left: 20px; /* Adjust this value as needed */
+    
+  transition: left 0.3s ease;
+  }
+
+
+
 .header{
     background-color: 'inherit';
     margin-bottom: 16px;
     display: flex;
+    justify-content: space-between;
 }
 
 .title{
@@ -21,4 +35,17 @@
     color: white;
     margin-bottom: 24px;
 }
+
+.menu {
+    
+    position:fixed;
+    top: 16px;
+    left: 16px;
+    background-color: black;
+    border: 1px solid #ddd;
+    padding: 8px;
+    cursor: pointer;
+  
+    font-size: 18px;
+  }
 

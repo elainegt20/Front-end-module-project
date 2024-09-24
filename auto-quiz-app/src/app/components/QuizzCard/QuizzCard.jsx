@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
-import { Stack, Paper } from '@mui/material';
-
+import { Stack, Paper, useMediaQuery } from '@mui/material';
 import QuestionCard from './QuestionCard';
 
 import styles from './QuizzCard.module.css';
 
 const QuizzCard = ({ data, setAnswers, onQuestionComplete, subtopic }) => {
+  const isSmallScreen = useMediaQuery('(max-width:768px)');
   const subtopicRefs = React.useRef({});
   const handleAnswerSubmit = (answer) => {
     setAnswers((prevAnswers) => {
@@ -34,9 +34,13 @@ const QuizzCard = ({ data, setAnswers, onQuestionComplete, subtopic }) => {
               <Paper
                 key={`${quizzIndex}-${subtopicIndex}-${questionIndex}`}
                 elevation={3}
-                sx={{ width: 800, p: 2.5, borderRadius: 2 }}
+                sx={{
+                  width: isSmallScreen ? '80%' : '800px',
+                  p: 2.5,
+                  borderRadius: 2,
+                }}
               >
-                <Stack spacing={2.5}>
+                <Stack>
                   <QuestionCard
                     key={question.global_question_index}
                     questionIndex={question.global_question_index}

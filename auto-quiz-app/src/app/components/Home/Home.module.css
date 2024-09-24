@@ -1,0 +1,158 @@
+
+/* Header */
+.header {
+  background-color: black;
+  color: white;
+  padding: 1.5rem 0;
+  
+}
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  
+}
+.headerTitle {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+/* Footer */
+.quizFooter {
+  background-color: black;
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* FeatureCards */
+.featureCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+.card:hover {
+  border-color: black;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.icon {
+  width: 3rem;
+  height: 3rem;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+.featureTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.featureDescription {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* HowItWorks */
+.howItWorks {
+  margin-bottom: 4rem;
+  padding: 50px;
+}
+.HowItWorksTitle {
+  font-size: 2.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+}
+.step {
+  text-align: center;
+}
+.iconWrapper {
+  position: relative;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1.5rem;
+}
+.HowItWorksIcon {
+  position: absolute;
+  top: 25px;
+  width: 3rem;
+  height: 3rem;
+  color: black;
+}
+.HowItWorksSubtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.HowItWorksDescription {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* HomeDisplayArea */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.mainContent {
+  flex-grow: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  
+}
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 3rem;
+  font-size: 1.125rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* uploadSection */
+
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  height:300px;
+  width: 100%;
+}

@@ -1,6 +1,5 @@
 'use client';
 import MenuList from '../Sidebar/MenuList';
-import Header from '../Sidebar/Header';
 import TitleSection from '../Sidebar/TitleSection';
 import SideBarContainer from '../Sidebar/SideBarContainer';
 import QuizzCard from '../QuizzCard/QuizzCard';
@@ -72,7 +71,7 @@ const QuizDisplayArea = ({ data, setData }) => {
     <div className={styles.parentContainer}>
       <div className={styles.sideBarContainer}>
         <SideBarContainer>
-          <Header />
+          {/* <Header /> */}
           <TitleSection data={data} />
           <MenuList
             data={data}
@@ -96,7 +95,13 @@ const QuizDisplayArea = ({ data, setData }) => {
             Go to Results
           </Typography>
         </UtilButton>
-        <CheckModal open={open} onClose={handleClose} />
+        <CheckModal
+          open={open}
+          onClose={handleClose}
+          message={
+            'Please complete all questions before proceeding to results.'
+          }
+        />
       </footer>
     </div>
   );
