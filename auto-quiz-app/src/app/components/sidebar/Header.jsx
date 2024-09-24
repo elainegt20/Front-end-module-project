@@ -24,21 +24,7 @@ const Header = ({ toggleSidebar, isOpen }) => {
           <HomeIcon fontSize="inherit" style={{ color: 'white' }} />
         </IconButton>
       </Link>
-      {/* <IconButton
-        onClick={() => {
-          toggleSidebar();
-        }}
-      >
-        {isOpen && isSmallScreen ? (
-          <CloseIcon fontSize="inherit" style={{ color: 'white' }} />
-        ) : (
-          <MenuIcon
-            className={styles.menu}
-            fontSize="inherit"
-            style={{ color: 'white', backgroundColor: 'transparent' }}
-          />
-        )}
-      </IconButton> */}
+
       {isSmallScreen && (
         <IconButton
           onClick={() => {
@@ -50,8 +36,11 @@ const Header = ({ toggleSidebar, isOpen }) => {
           ) : (
             <MenuIcon
               className={styles.menu}
-              fontSize="inherit"
-              style={{ color: 'white', backgroundColor: 'transparent' }}
+              style={{
+                color: 'white',
+                backgroundColor: 'transparent',
+                fontSize: '40px',
+              }}
             />
           )}
         </IconButton>

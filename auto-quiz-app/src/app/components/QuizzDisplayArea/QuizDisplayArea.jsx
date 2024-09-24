@@ -1,14 +1,14 @@
 'use client';
+import { Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import MenuList from '../Sidebar/MenuList';
 import TitleSection from '../Sidebar/TitleSection';
 import SideBarContainer from '../Sidebar/SideBarContainer';
 import QuizzCard from '../QuizzCard/QuizzCard';
 import React from 'react';
 import styles from './DisplayArea.module.css';
-import { Typography } from '@mui/material';
 import CheckModal from '../Modal/Modal';
 import UtilButton from '../Button/Button';
-import { useRouter } from 'next/navigation';
 
 const QuizDisplayArea = ({ data, setData }) => {
   const router = useRouter();

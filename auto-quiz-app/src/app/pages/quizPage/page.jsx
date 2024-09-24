@@ -17,7 +17,7 @@ const QuizAreaPage = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      const storedData = localStorage.getItem('quizData'); // Make sure this key matches the one used in FileUploader
+      const storedData = localStorage.getItem('quizData');
       if (storedData) {
         try {
           const parsedData = JSON.parse(storedData);

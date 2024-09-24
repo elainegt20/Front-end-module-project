@@ -5,7 +5,7 @@ import fs from 'fs';
 import axios from 'axios';
 
 // Ensure the uploads directory exists
-//checking
+
 const ensureUploadsDirectory = async () => {
   const uploadsDir = path.join(process.cwd(), 'uploads');
   if (!fs.existsSync(uploadsDir)) {
@@ -27,7 +27,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
   Please ensure the structure is as follows and on the array of anwers include the correct answer too on a random position.The array of answers should have 4 anwers, all of them different for each questions. Quiz topic and subtopicn should have 1-2 words:
 
  
-   { "numberOfTotalQuestions":number, "quizName": Quiz Name, "dashboard": [
+   { "quizName": Quiz Name, "dashboard": [
       {
         "topic": "Topic Title",
         "subtopics": [
@@ -104,7 +104,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
         'Quota exceeded. Please upgrade your plan or wait for quota reset.',
       );
     }
-    // Log the full error message for diagnosis
+    // Log the full error message
     console.error('Error generating quiz questions:', error.message);
     if (error.response) {
       console.error('Error response from API:', error.response.data);

@@ -23,8 +23,6 @@ const QuestionCard = ({
       yourAnswer: question.answers[index],
       correctAnswer: question.correct_answer,
       question: question.question,
-      subtopic: question.subtopic,
-      topic: question.topic,
     };
 
     onAnswerSubmit({ [questionIndex]: result });
