@@ -1,9 +1,9 @@
-import HomeDisplayArea from './components/Home/HomeDisplayArea';
+import Welcome from './components/welcomePage/WelcomePage';
 
 const Home = () => {
   return (
     <>
-      <HomeDisplayArea />
+      <Welcome />
     </>
   );
 };

@@ -1,27 +1,22 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CheckModal from '../../components/Modal/Modal';
-import DisplayArea from '../../components/QuizzDisplayArea/QuizDisplayArea';
+import QuizDisplayArea from '../../components/QuizzDisplayArea/QuizDisplayArea';
 
-const QuizAreaPage = () => {
+export default function QuizDetail({ quizData }) {
   const router = useRouter();
-  const [data, setData] = useState(null);
   const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-    router.push('/');
-  };
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = () => {
-      const storedData = localStorage.getItem('quizData');
-      if (storedData) {
+      console.log('Quiz data:', quizData);
+
+      if (quizData) {
         try {
-          const parsedData = JSON.parse(storedData);
-          setData(parsedData);
+          setData(quizData.data);
           setOpen(false);
         } catch (error) {
           console.error('Error parsing stored data:', error);
@@ -29,25 +24,22 @@ const QuizAreaPage = () => {
           setOpen(true);
         }
       } else {
-        setOpen(true); // Open the modal if no data is found
+        setOpen(true);
       }
     };
 
     fetchData();
-
-    // Add event listener for storage changes
-    window.addEventListener('storage', fetchData);
-
-    // Cleanup function
-    return () => {
-      window.removeEventListener('storage', fetchData);
-    };
   }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+    router.push('/uploadNotesPage');
+  };
 
   return (
     <main>
       {data ? (
-        <DisplayArea data={data} setData={setData} />
+        <QuizDisplayArea data={data} setData={setData} />
       ) : (
         <div
           style={{
@@ -66,6 +58,4 @@ const QuizAreaPage = () => {
       )}
     </main>
   );
-};
-
-export default QuizAreaPage;
+}

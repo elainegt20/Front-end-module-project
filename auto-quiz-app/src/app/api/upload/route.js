@@ -3,6 +3,10 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs';
 import axios from 'axios';
+import { PrismaClient } from '@prisma/client';
+import { auth } from '../../../auth'; // Import auth to get the session
+
+const prisma = new PrismaClient();
 
 // Ensure the uploads directory exists
 
@@ -82,7 +86,7 @@ const generateQuizQuestionsWithAnswers = async (text) => {
       },
     );
 
-    console.log('OpenAI API response:', response.data);
+    //console.log('OpenAI API response:', response.data);
 
     // Check if response is valid JSON or contains an error
     if (
@@ -118,10 +122,15 @@ const generateQuizQuestionsWithAnswers = async (text) => {
 };
 
 export async function POST(request) {
+  const session = await auth();
+  if (!session?.user) {
+    return NextResponse.json(
+      { success: false, error: 'Not authenticated' },
+      { status: 401 },
+    );
+  }
   const data = await request.formData();
   const file = data.get('file');
-  const openaiApiKey = process.env.OPENAI_API_KEY;
-  console.log('OpenAI API Key:', openaiApiKey);
 
   if (!file) {
     return NextResponse.json({ success: false });
@@ -137,20 +146,25 @@ export async function POST(request) {
   try {
     await ensureUploadsDirectory(); // Ensure uploads directory exists
     await writeFile(filePath, buffer); // Save the file persistently
-    console.log(`File saved to ${filePath}`);
 
     // Read the content of the saved text file
     const textContent = await readFile(filePath, 'utf-8');
-    console.log('Extracted text content from file:', textContent);
 
     // Call OpenAI to generate quiz questions using the text content
     const quizData = await generateQuizQuestionsWithAnswers(textContent);
-    console.log('Quiz data:', quizData);
 
-    // Return the result from OpenAI
+    // Save the quiz data to the database
+    const savedQuiz = await prisma.quiz.create({
+      data: {
+        quizName: quizData.quizName,
+        dashboard: JSON.stringify(quizData.dashboard), // Convert to string for storage
+        userId: session.user.id,
+      },
+    });
+
     return NextResponse.json({
       success: true,
-      questions: quizData,
+      questions: savedQuiz,
     });
   } catch (error) {
     console.error('Error processing the file:', error);
