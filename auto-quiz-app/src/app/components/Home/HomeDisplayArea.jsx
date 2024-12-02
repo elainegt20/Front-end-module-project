@@ -9,7 +9,6 @@ import styles from './Home.module.css';
 const HomeDisplayArea = () => {
   return (
     <div className={styles.layout}>
-      <Header />
       <main className={styles.mainContent}>
         <Typography variant="h2" className={styles.title}>
           Transform Your Notes into Quizzes

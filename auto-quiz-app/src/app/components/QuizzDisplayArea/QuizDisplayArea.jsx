@@ -1,6 +1,7 @@
 'use client';
 import { Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { saveQuizAnswers } from '../../actions/quizActions';
 import MenuList from '../Sidebar/MenuList';
 import TitleSection from '../Sidebar/TitleSection';
 import SideBarContainer from '../Sidebar/SideBarContainer';
@@ -25,53 +26,117 @@ const QuizDisplayArea = ({ data, setData }) => {
     })),
   );
 
-  const handleQuestionComplete = (topicIndex, subtopicIndex, questionIndex) => {
-    const newData = { ...data };
-    const question =
-      newData.dashboard[topicIndex].subtopics[subtopicIndex].questions[
-        questionIndex
-      ];
-    question.completed = true;
-    setData(newData);
+  const handleQuestionComplete = async (
+    topicIndex,
+    subtopicIndex,
+    questionIndex,
+  ) => {
+    try {
+      const newData = { ...data };
+      const question =
+        newData.dashboard[topicIndex].subtopics[subtopicIndex].questions[
+          questionIndex
+        ];
+      question.completed = true;
+      setData(newData);
 
-    const newCompletionStatus = [...completionStatus];
-    const subtopic = newData.dashboard[topicIndex].subtopics[subtopicIndex];
-    const isSubtopicCompleted = subtopic.questions.every((q) => q.completed);
-    newCompletionStatus[topicIndex].subtopics[subtopicIndex] =
-      isSubtopicCompleted;
-
-    const isTopicCompleted = newCompletionStatus[topicIndex].subtopics.every(
-      (s) => s,
-    );
-    newCompletionStatus[topicIndex].topicCompleted = isTopicCompleted;
-
-    setCompletionStatus(newCompletionStatus);
+      // handle sidebar completion status
+      const newCompletionStatus = [...completionStatus];
+      const subtopic = newData.dashboard[topicIndex].subtopics[subtopicIndex];
+      const isSubtopicCompleted = subtopic.questions.every((q) => q.completed);
+      newCompletionStatus[topicIndex].subtopics[subtopicIndex] =
+        isSubtopicCompleted;
+      const isTopicCompleted = newCompletionStatus[topicIndex].subtopics.every(
+        (s) => s,
+      );
+      newCompletionStatus[topicIndex].topicCompleted = isTopicCompleted;
+      setCompletionStatus(newCompletionStatus);
+    } catch (error) {
+      console.error('Error completing question:', error);
+    }
   };
 
-  const goToResults = () => {
-    const totalQuestions = data['dashboard'].reduce((acc, curr) => {
+  const goToResults = async () => {
+    const totalQuestions = data.dashboard.reduce((acc, topic) => {
       return (
         acc +
-        curr.subtopics.reduce((acc, curr) => {
-          return acc + curr.questions.length;
+        topic.subtopics.reduce((subAcc, subtopic) => {
+          return subAcc + subtopic.questions.length;
         }, 0)
       );
     }, 0);
 
-    if (totalQuestions !== Object.keys(answers).length) {
+    console.log('Total questions:', totalQuestions);
+    console.log('Answered questions:', Object.keys(answers).length);
+
+    const allQuestionsAnswered = data.dashboard.every((topic) =>
+      topic.subtopics.every((subtopic) =>
+        subtopic.questions.every(
+          (question) => answers[question.global_question_index] !== undefined,
+        ),
+      ),
+    );
+
+    if (!allQuestionsAnswered) {
       setOpen(true);
       return;
     }
 
-    localStorage.setItem('answers', JSON.stringify(Object.values(answers)));
-    router.push('/pages/resultsPage');
+    await saveQuizAnswers(data.id, JSON.stringify(answers));
+
+    router.push(
+      `/resultsPage?id=${data.id}&answers=${encodeURIComponent(JSON.stringify(answers))}`,
+    );
+    router.refresh();
   };
+
+  React.useEffect(() => {
+    if (data.answers) {
+      console.log('Data answers 1:', data.answers);
+
+      // set completion status based on previous answers
+      const newCompletionStatus = data.dashboard.map((topic) => ({
+        topicCompleted: topic.subtopics.every((sub) =>
+          sub.questions.every((q) => data.answers[q.global_question_index]),
+        ),
+        subtopics: topic.subtopics.map((sub) =>
+          sub.questions.every((q) => data.answers[q.global_question_index]),
+        ),
+      }));
+      setCompletionStatus(newCompletionStatus);
+
+      setAnswers(data.answers);
+
+      setData((prevData) => {
+        return {
+          ...prevData,
+          dashboard: prevData.dashboard.map((topic, topicIndex) => {
+            return {
+              ...topic,
+              subtopics: topic.subtopics.map((subtopic, subtopicIndex) => {
+                return {
+                  ...subtopic,
+                  questions: subtopic.questions.map((question) => {
+                    return {
+                      ...question,
+                      completed: data.answers[question.global_question_index]
+                        ? true
+                        : false,
+                    };
+                  }),
+                };
+              }),
+            };
+          }),
+        };
+      });
+    }
+  }, [data.id]);
 
   return (
     <div className={styles.parentContainer}>
       <div className={styles.sideBarContainer}>
         <SideBarContainer>
-          {/* <Header /> */}
           <TitleSection data={data} />
           <MenuList
             data={data}
@@ -84,6 +149,7 @@ const QuizDisplayArea = ({ data, setData }) => {
       <div className={styles.quizzContainer}>
         <QuizzCard
           data={data}
+          answers={answers}
           setAnswers={setAnswers}
           onQuestionComplete={handleQuestionComplete}
           subtopic={subtopic}

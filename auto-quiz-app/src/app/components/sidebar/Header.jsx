@@ -12,7 +12,7 @@ const Header = ({ toggleSidebar, isOpen }) => {
   const isSmallScreen = useMediaQuery('(max-width:768px)');
   return (
     <div className={styles.header}>
-      <Link href="/">
+      <Link href="/uploadNotesPage">
         <IconButton
           size="large"
           sx={{

@@ -13,36 +13,29 @@ import {
 } from '@mui/material';
 import { CheckCircleOutline, CancelOutlined } from '@mui/icons-material';
 
-const ResultsPanel = () => {
+const ResultsPanel = ({ answers }) => {
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchResults = () => {
-      const storedResults = localStorage.getItem('answers');
+    if (answers) {
+      try {
+        // Convert answers into an array if it's not already
+        const parsedAnswers = JSON.parse(decodeURIComponent(answers));
+        // Log to check the structure
+        console.log('Parsed answers:', parsedAnswers);
 
-      if (storedResults) {
-        try {
-          const parsedResults = JSON.parse(storedResults);
-          setResults(parsedResults);
-          console.log(parsedResults);
-        } catch (error) {
-          console.error('Error parsing stored results:', error);
-          setResults([]);
-        }
+        //Convert to array if it's an object
+        const answersArray = Array.isArray(parsedAnswers)
+          ? parsedAnswers
+          : Object.values(parsedAnswers);
+
+        setResults(answersArray);
+      } catch (error) {
+        console.error('Error parsing answers:', error);
+        setResults([]);
       }
-    };
-
-    fetchResults();
-
-    // Add event listener for storage changes
-    window.addEventListener('storage', fetchResults);
-
-    // Cleanup function
-    return () => {
-      window.removeEventListener('storage', fetchResults);
-    };
-  }, []);
-
+    }
+  }, [answers]);
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
       <Paper elevation={3} sx={{ p: 3, bgcolor: '#ffffff' }}>

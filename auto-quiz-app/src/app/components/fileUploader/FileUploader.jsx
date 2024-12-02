@@ -35,19 +35,20 @@ export default function FileUploader() {
         throw new Error(response.statusText);
       }
 
-      const result = response.data;
+      console.log('Upload response:', response.data); // Debug log
 
-      // Clear the file input after upload is complete
-      setFile(null);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+      if (response) {
+        const quiz = response;
+        console.log('Created quiz:', quiz); // Debug log
+
+        // Clear form
+        setFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+
+        router.push(`/quizzesPage/${quiz.data.questions.id}`);
       }
-
-      // Store the data in local storage
-      localStorage.setItem('quizData', JSON.stringify(result.questions));
-
-      // Navigate to the quiz page
-      router.push('/pages/quizPage');
     } catch (error) {
       console.error(error);
       setLoading(false);
