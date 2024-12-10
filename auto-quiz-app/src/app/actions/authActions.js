@@ -10,10 +10,11 @@ export async function signInUser(data) {
     await signIn('credentials', {
       email: data.email,
       password: data.password,
+
       redirect: false,
     });
 
-    return { status: 'success', data: 'Logged in' };
+    return { status: 'success', data: data };
   } catch (error) {
     console.log(error);
     if (error instanceof AuthError) {

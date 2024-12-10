@@ -29,8 +29,10 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     const result = await signInUser(data);
     if (result.status === 'success') {
-      console.log('User logged in successfully');
-      router.push('/uploadNotesPage');
+      console.log('User logged in successfully', data);
+      const isAdmin = data.email.includes('admin');
+      const page = isAdmin ? '/adminPage/homePage' : '/uploadNotesPage';
+      router.push(page);
       router.refresh();
     } else {
       toast.error(result.error || 'Error logging in user');

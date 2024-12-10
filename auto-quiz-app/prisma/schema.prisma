@@ -33,3 +33,12 @@ model Quiz {
 
   @@index([userId])
 }
+
+model Token {
+  id      String   @id @default(cuid())
+  email   String
+  token   String
+  expires DateTime
+
+  @@unique([email, token])
+}

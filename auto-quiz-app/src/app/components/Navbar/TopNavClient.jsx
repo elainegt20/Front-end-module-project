@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { Typography } from '@mui/material';
 import UtilButton from '../Button/Button';
 import { useRouter } from 'next/navigation';
@@ -10,6 +10,15 @@ import Link from 'next/link';
 const TopNavClient = ({ session }) => {
   const router = useRouter();
 
+  const UserLinks = [{ href: '/quizzesPage', label: 'My Quizzes' }];
+
+  const adminLinks = [
+    {
+      href: '/adminPage/dashboardPage',
+      label: 'Profiles Dashboard',
+    },
+  ];
+
   const goToLogin = () => {
     router.push('/authPage/login');
   };
@@ -18,16 +27,20 @@ const TopNavClient = ({ session }) => {
     router.push('/authPage/register');
   };
 
-  const goToUserQuizzes = () => {
-    router.push('/quizzesPage');
+  const goToPage = (page) => {
+    router.push(page);
   };
+
+  const links = session?.user.role === 'ADMIN' ? adminLinks : UserLinks;
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <Typography variant="h1" className={styles.headerTitle}>
           <Link
-            href="/uploadNotesPage"
+            href={
+              links === adminLinks ? '/adminPage/homePage' : '/uploadNotesPage'
+            }
             style={{ color: 'white', textDecoration: 'none' }}
           >
             Quiz Generator
@@ -36,18 +49,17 @@ const TopNavClient = ({ session }) => {
 
         <div className={styles.navListContainer}>
           {session?.user ? (
-            (console.log(session.user),
-            (
-              <>
+            links.map((item) => (
+              <React.Fragment key={item.href}>
                 <UtilButton
-                  onClick={goToUserQuizzes}
+                  onClick={() => goToPage(item.href)}
                   color="white"
                   backgroundColor="black"
                 >
-                  My Quizzes
+                  {item.label}
                 </UtilButton>
                 <UserMenu user={session.user} />
-              </>
+              </React.Fragment>
             ))
           ) : (
             <>
