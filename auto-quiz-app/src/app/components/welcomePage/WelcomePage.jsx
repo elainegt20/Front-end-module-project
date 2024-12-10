@@ -62,14 +62,14 @@ export default function WelcomePage() {
           </Typography>
           <Box sx={{ maxWidth: '600px', margin: '2rem 0' }}>
             <Typography variant="body1" paragraph>
-              Welcome to QuizGen, where creativity meets simplicity. Our
-              intuitive platform empowers educators, trainers, and curious minds
-              to generate custom quizzes effortlessly.
+              Welcome to Quiz Genenerator, where creativity meets simplicity.
+              Our intuitive platform empowers educators, trainers, and curious
+              minds to generate custom quizzes effortlessly.
             </Typography>
             <Typography variant="body1" paragraph>
               Dive into a world of knowledge creation and explore the power of
-              interactive learning. Start your journey with QuizGen today and
-              transform the way you engage with information.
+              interactive learning. Start your journey with Quiz Generator today
+              and transform the way you engage with information.
             </Typography>
           </Box>
           <Divider sx={{ width: '50%', margin: '2rem 0' }} />

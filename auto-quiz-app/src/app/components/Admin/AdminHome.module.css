@@ -1,0 +1,65 @@
+.cuteContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+
+.content {
+    text-align: center;
+}
+
+.adminIcon {
+    font-size: 5rem;
+    animation: wave 2s infinite;
+}
+
+.welcomeText {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin: 20px 0;
+    position: relative;
+}
+
+.welcomeText::after {
+    content: '|';
+    position: absolute;
+    right: -10px;
+    animation: blink 0.7s infinite;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666666;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(20deg);
+    }
+
+    75% {
+        transform: rotate(-15deg);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}

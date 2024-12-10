@@ -41,8 +41,8 @@ const RegistrationForm = () => {
   const onSubmit = async () => {
     const result = await registerUser(getValues());
     if (result.status === 'success') {
-      console.log('User registered successfully');
       router.push('/uploadNotesPage');
+      router.refresh();
     } else {
       console.log('Error registering user');
       handleFormServerErrors(result, setError);

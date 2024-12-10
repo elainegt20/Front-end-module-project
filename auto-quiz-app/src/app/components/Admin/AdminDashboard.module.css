@@ -1,0 +1,124 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.userItem {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  width: 1000px;
+  gap: 20px;
+}
+
+.userItem:hover {
+  background-color: #e0e0e0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.userName {
+  font-weight: bold;
+}
+
+.userEmail, .userRole, .userPassword {
+  font-size: 14px;
+  color: #666;
+}
+
+.input, .select {
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton, .saveButton, .cancelButton, .deleteButton, .pageButton {
+  padding: 5px 10px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editButton, .saveButton {
+  background-color: #000;
+  color: #fff;
+}
+
+.editButton:hover, .saveButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.cancelButton, .pageButton {
+  background-color: #fff;
+  color: #000;
+}
+
+.cancelButton:hover, .pageButton:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.deleteButton {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.deleteButton:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.activePage {
+  background-color: #000;
+  color: #fff;
+}
+
